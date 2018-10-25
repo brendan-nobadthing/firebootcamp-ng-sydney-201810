@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Company } from '../company';
 import { CompanyService } from '../company.service';
-import { tap } from 'rxjs/operators';
+import { tap, takeWhile, finalize } from 'rxjs/operators';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'fbc-company-list',
@@ -10,24 +11,28 @@ import { tap } from 'rxjs/operators';
 })
 export class CompanyListComponent implements OnInit {
 
-  companies: Company[] = [];
+  companies$: Observable<Company[]>;
+
 
   constructor(private companyService: CompanyService) {
   }
 
   ngOnInit() {
-    this.companyService.getCompanies()
+
+    this.companies$ = this.companyService.getCompanies()
     .pipe(
-      tap(c => console.log('component has companies'))
-    )
-    .subscribe(
-      next => {
-        this.companies = next;
-        console.log('Component Next value');
-      },
-      error => { console.error('ERROR in component'); },
-      () => {console.log('COMPLETE'); } );
+      tap(c => console.log('component has companies')),
+      finalize (() => console.log('complete'))
+    );
+    // .subscribe(
+    //   next => {
+    //     this.companies = next;
+    //     console.log('Component Next value');
+    //   },
+    //   error => { console.error('ERROR in component'); },
+    //   () => {console.log('COMPLETE'); } );
   }
+
 
 
 

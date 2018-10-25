@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let c of companies">
+    <tr *ngFor="let c of companies$ | async">
       <td>{{ c.name }}</td>
       <td>{{ c.phone }}</td>
       <td>{{ c.email }}</td>
