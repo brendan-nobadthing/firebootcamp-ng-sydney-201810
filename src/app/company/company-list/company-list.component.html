@@ -1,1 +1,22 @@
-{{ companies | json }}
+<h1>
+  Companies
+</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of companies">
+      <td>{{ c.name }}</td>
+      <td>{{ c.phone }}</td>
+      <td>{{ c.email }}</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
