@@ -16,7 +16,9 @@
       <td>{{ c.name }}</td>
       <td>{{ c.phone }}</td>
       <td>{{ c.email }}</td>
-      <td></td>
+      <td>
+        <button type="button" class="btn btn-danger" (click)="deleteClicked(c)">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>

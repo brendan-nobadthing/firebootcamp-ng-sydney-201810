@@ -18,23 +18,22 @@ export class CompanyListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadCompanies();
+  }
 
+
+  loadCompanies() {
     this.companies$ = this.companyService.getCompanies()
     .pipe(
       tap(c => console.log('component has companies')),
       finalize (() => console.log('complete'))
     );
-    // .subscribe(
-    //   next => {
-    //     this.companies = next;
-    //     console.log('Component Next value');
-    //   },
-    //   error => { console.error('ERROR in component'); },
-    //   () => {console.log('COMPLETE'); } );
   }
 
-
-
+  deleteClicked(company: Company) {
+    this.companyService.deleteCompany(company)
+      .subscribe(c => this.loadCompanies());
+  }
 
 
 }
