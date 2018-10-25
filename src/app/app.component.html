@@ -1,11 +1,14 @@
-<div style="text-align:center">
-  <h1>
-    Welcome to, Sydney, to {{ title | uppercase }}!
-  </h1>
-</div>
+<nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand">FireBootCamp CRM</a>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item" [routerLinkActive]="'active'">
+      <a class="nav-link" [routerLink]="['company', 'list']">Companies</a>
+    </li>
+  </ul>
+</nav>
 
 <div class="container">
-    <fbc-company-list></fbc-company-list>
+    <router-outlet></router-outlet>
 </div>
 
 
