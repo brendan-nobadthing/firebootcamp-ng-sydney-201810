@@ -31,27 +31,31 @@ export class CompanyService {
       .subscribe(c => this.companies$.next(c));
   }
 
-  deleteCompany(company: Company): Observable<Company> {
+  deleteCompany(company: Company) {
     console.log('DELETE 1');
     const x = this.httpClient.delete<Company>(`${this.API_BASE}/company/${company.id}`)
       .pipe(catchError(error => this.errorHandler<Company>(error)));
     console.log('DELETE 2');
-    return x;
+    x.subscribe(c => this.loadCompanies());
   }
 
-  addCompany(company: Company): Observable<Company>{
-    return this.httpClient.post<Company>(`${this.API_BASE}/company`, company, {
+  addCompany(company: Company){
+    this.httpClient.post<Company>(`${this.API_BASE}/company`, company, {
       headers: new HttpHeaders().set('content-type', 'application/json')
     })
-    .pipe(catchError(error => this.errorHandler<Company>(error))); // Add Error Handling
+    .pipe(catchError(error => this.errorHandler<Company>(error)))
+    .subscribe(c => this.loadCompanies());
   }
 
-  updateCompany(company: Company): Observable<Company> {
-    return this.httpClient.put<Company>(`${this.API_BASE}/company/${company.id}`, company, {
+  updateCompany(company: Company) {
+    this.httpClient.put<Company>(`${this.API_BASE}/company/${company.id}`, company, {
       headers: new HttpHeaders().set('content-type', 'application/json')
     })
-    .pipe(catchError(error => this.errorHandler<Company>(error))); // Add Error Handling
+    .pipe(catchError(error => this.errorHandler<Company>(error)))
+    .subscribe(c => this.loadCompanies());
   }
+
+
 
   getCompany(id: number): Observable<Company> {
     return this.httpClient.get<Company>(`${this.API_BASE}/company/${id}`)
