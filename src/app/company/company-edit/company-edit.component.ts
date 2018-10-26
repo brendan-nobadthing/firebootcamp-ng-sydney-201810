@@ -22,8 +22,9 @@ export class CompanyEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // tslint:disable-next-line:radix
     this.companyId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.isNewCompany = this.companyId == 0;
+    this.isNewCompany = this.companyId === 0;
 
     this.buildForm();
 
@@ -42,7 +43,7 @@ export class CompanyEditComponent implements OnInit {
         phone: ['0061'],
         email: ['']
       }
-    )
+    );
   }
 
   saveCompany() {
@@ -55,7 +56,7 @@ export class CompanyEditComponent implements OnInit {
     this.navigate('/company/list');
   }
 
-  navigate(url: string){
+  navigate(url: string) {
     this.router.navigateByUrl(url);
   }
 

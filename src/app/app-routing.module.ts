@@ -6,7 +6,8 @@ import { CompanyEditComponent } from './company/company-edit/company-edit.compon
 const routes: Routes = [
   { path: '',  redirectTo: 'company/list', pathMatch: 'full'},
   { path: 'company/list', component: CompanyListComponent },
-  { path: 'company/edit/:id', component: CompanyEditComponent  }
+  { path: 'company/edit/:id', component: CompanyEditComponent  },
+  { path: 'admin', loadChildren: '../app/admin/admin.module#AdminModule' }
 ];
 
 @NgModule({
