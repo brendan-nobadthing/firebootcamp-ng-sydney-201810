@@ -35,7 +35,7 @@ export class CompanyEditComponent implements OnInit {
     }
   }
 
-  buildForm(){
+  buildForm() {
     this.companyForm = this.formBuilder.group(
       {
         name: ['', Validators.required],
